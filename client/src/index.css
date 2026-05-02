@@ -1,0 +1,322 @@
+@import "tailwindcss";
+
+
+:root {
+  /* Light theme palette */
+  --color-primary: #4f46e5;          /* indigo-600 */
+  --color-secondary: #f9fafb;        /* gray-50 */
+  --color-accent: #0ea5e9;           /* sky-500 */
+  --color-accent-hover: #0284c7;     /* sky-600 */
+  --color-text-primary: #111827;     /* gray-900 */
+  --color-text-muted: #6b7280;       /* gray-500 */
+  --color-border: #e5e7eb;           /* gray-200 */
+  --color-card: #ffffff;
+  --color-success: #10b981;          /* emerald-500 */
+  --color-danger: #ef4444;
+
+  /* Light Shades */
+  --color-primary-light: #6366f1;    /* indigo-500 */
+  --color-primary-lighter: #a5b4fc;  /* indigo-300 */
+  --color-secondary-light: #ffffff;
+  --color-accent-light: #7dd3fc;     /* sky-300 */
+  --color-accent-lighter: #bae6fd;   /* sky-200 */
+  --color-card-light: #f3f4f6;       /* gray-100 */
+  --color-card-lighter: #ffffff;
+  --color-border-light: #e5e7eb;
+  --color-border-lighter: #d1d5db;
+
+  /* Background variants */
+  --color-bg-primary: #8f7070;
+  --color-bg-secondary: #f3f4f6;
+  --color-bg-elevated: #ffffff;
+
+  /* Modern accent colors (still available) */
+  --color-teal: #14b8a6;
+  --color-teal-light: #5eead4;
+  --color-cyan: #06b6d4;
+  --color-cyan-light: #67e8f9;
+  --color-indigo: #6366f1;
+  --color-indigo-light: #a5b4fc;
+  --color-violet: #8b5cf6;
+  --color-violet-light: #c4b5fd;
+  --color-sky: #0ea5e9;
+  --color-sky-light: #7dd3fc;
+  --color-pink: #ec4899;
+  --color-pink-light: #f9a8d4;
+  --color-fuchsia: #d946ef;
+  --color-fuchsia-light: #e879f9;
+
+  /* Font family */
+  --font-sans: system-ui, '-apple-system', 'Poppins', sans-serif;
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Remove default transitions for certain properties */
+* {
+  transition-property: color, background-color, border-color, opacity, transform, box-shadow;
+}
+
+/* Custom scrollbar - Modern style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-bg-primary);
+}
+
+/* Input focus styles - Improved accessibility */
+input:focus, 
+button:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5); /* indigo-600 with opacity */
+  
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(139, 92, 246, 0.2);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* Gradient backgrounds - Modern violet/pink theme */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+}
+
+.bg-gradient-violet {
+  background: linear-gradient(135deg, var(--color-violet) 0%, var(--color-pink) 100%);
+}
+
+.bg-gradient-dark {
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(23, 23, 23, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px -10px rgba(124, 58, 237, 0.3);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px -2px rgba(124, 58, 237, 0.5);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px -2px rgba(236, 72, 153, 0.5);
+}
+
+/* Light shade utility classes */
+.bg-primary-light { background-color: var(--color-primary-light); }
+.bg-primary-lighter { background-color: var(--color-primary-lighter); }
+.bg-secondary-light { background-color: var(--color-secondary-light); }
+.bg-card-light { background-color: var(--color-card-light); }
+.bg-card-lighter { background-color: var(--color-card-lighter); }
+.bg-elevated { background-color: var(--color-bg-elevated); }
+
+.text-accent-light { color: var(--color-accent-light); }
+.text-accent-lighter { color: var(--color-accent-lighter); }
+.text-teal { color: var(--color-teal); }
+.text-teal-light { color: var(--color-teal-light); }
+.text-cyan { color: var(--color-cyan); }
+.text-cyan-light { color: var(--color-cyan-light); }
+.text-indigo { color: var(--color-indigo); }
+.text-indigo-light { color: var(--color-indigo-light); }
+.text-violet { color: var(--color-violet); }
+.text-violet-light { color: var(--color-violet-light); }
+.text-pink { color: var(--color-pink); }
+.text-pink-light { color: var(--color-pink-light); }
+.text-fuchsia { color: var(--color-fuchsia); }
+.text-fuchsia-light { color: var(--color-fuchsia-light); }
+
+.border-light { border-color: var(--color-border-light); }
+.border-lighter { border-color: var(--color-border-lighter); }
+
+/* Hover states using light shades */
+.hover\:bg-primary-light:hover { background-color: var(--color-primary-light); }
+.hover\:bg-card-light:hover { background-color: var(--color-card-light); }
+.hover\:bg-accent-light:hover { background-color: var(--color-accent-light); }
+.hover\:bg-teal:hover { background-color: var(--color-teal); }
+.hover\:bg-cyan:hover { background-color: var(--color-cyan); }
+.hover\:bg-indigo:hover { background-color: var(--color-indigo); }
+.hover\:bg-violet:hover { background-color: var(--color-violet); }
+.hover\:bg-pink:hover { background-color: var(--color-pink); }
+.hover\:text-accent-light:hover { color: var(--color-accent-light); }
+.hover\:text-teal:hover { color: var(--color-teal); }
+.hover\:text-cyan:hover { color: var(--color-cyan); }
+.hover\:text-indigo:hover { color: var(--color-indigo); }
+.hover\:text-violet:hover { color: var(--color-violet); }
+.hover\:text-pink:hover { color: var(--color-pink); }
+.hover\:text-fuchsia:hover { color: var(--color-fuchsia); }
+
+/* Focus states for accessibility */
+.focus\:ring-primary:focus {
+  --tw-ring-color: var(--color-primary);
+}
+
+.focus\:ring-accent:focus {
+  --tw-ring-color: var(--color-accent);
+}
+
+/* Background color utilities */
+.bg-teal { background-color: var(--color-teal); }
+.bg-cyan { background-color: var(--color-cyan); }
+.bg-indigo { background-color: var(--color-indigo); }
+.bg-violet { background-color: var(--color-violet); }
+.bg-sky { background-color: var(--color-sky); }
+.bg-pink { background-color: var(--color-pink); }
+.bg-fuchsia { background-color: var(--color-fuchsia); }
+
+.bg-teal-light { background-color: var(--color-teal-light); }
+.bg-cyan-light { background-color: var(--color-cyan-light); }
+.bg-indigo-light { background-color: var(--color-indigo-light); }
+.bg-violet-light { background-color: var(--color-violet-light); }
+.bg-sky-light { background-color: var(--color-sky-light); }
+.bg-pink-light { background-color: var(--color-pink-light); }
+.bg-fuchsia-light { background-color: var(--color-fuchsia-light); }
+
+/* From color palette - for gradients */
+.from-primary { --tw-gradient-from: var(--color-primary); }
+.from-accent { --tw-gradient-from: var(--color-accent); }
+.from-violet { --tw-gradient-from: var(--color-violet); }
+.from-pink { --tw-gradient-from: var(--color-pink); }
+
+.to-primary-light { --tw-gradient-to: var(--color-primary-light); }
+.to-accent-light { --tw-gradient-to: var(--color-accent-light); }
+.to-violet-light { --tw-gradient-to: var(--color-violet-light); }
+.to-pink-light { --tw-gradient-to: var(--color-pink-light); }

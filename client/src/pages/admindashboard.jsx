@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAuth } from "../context/authcontext";
 import AdminAddProduct from "../components/AdminAddProduct";
 import EditProductModal from "../components/EditProductModal";
+import API_URL from "../api";
 
 function AdminDashboard() {
   const { userInfo } = useAuth();
@@ -28,17 +29,16 @@ function AdminDashboard() {
     (p) => filterCategory === "All" || p.category === filterCategory,
   );
 
-  // FETCH PRODUCTS
   useEffect(() => {
     if (section === "manage") {
       axios
-        .get("http://localhost:45690/api/products")
+        .get(`${API_URL}/api/products`)
         .then((res) => setProducts(res.data));
     }
   }, [section]);
 
   const deleteProduct = async (id) => {
-    await axios.delete(`http://localhost:45690/api/products/${id}`, {
+    await axios.delete(`${API_URL}/api/products/${id}`, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
@@ -47,27 +47,24 @@ function AdminDashboard() {
     setProducts(products.filter((p) => p._id !== id));
   };
 
-  // FETCH ORDERS
   useEffect(() => {
     if (section === "orders") {
       axios
-        .get("http://localhost:45690/api/orders", {
+        .get(`${API_URL}/api/orders`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         })
         .then((res) => setOrders(res.data));
     }
   }, [section, userInfo]);
 
-  // FETCH HERO
   useEffect(() => {
     if (section === "hero") {
       axios
-        .get("http://localhost:45690/api/hero")
+        .get(`${API_URL}/api/hero`)
         .then((res) => setSlides(res.data));
     }
   }, [section]);
 
-  // ADD HERO
   const addSlide = async () => {
     const formData = new FormData();
     formData.append("title", newSlide.title);
@@ -76,7 +73,7 @@ function AdminDashboard() {
     formData.append("image", newSlide.image);
 
     const { data } = await axios.post(
-      "http://localhost:45690/api/hero",
+      `${API_URL}/api/hero`,
       formData,
       {
         headers: {
@@ -90,19 +87,17 @@ function AdminDashboard() {
     setNewSlide({ title: "", subtitle: "", isActive: true });
   };
 
-  // DELETE HERO
   const deleteSlide = async (id) => {
-    await axios.delete(`http://localhost:45690/api/hero/${id}`, {
+    await axios.delete(`${API_URL}/api/hero/${id}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
 
     setSlides(slides.filter((s) => s._id !== id));
   };
 
-  // TOGGLE ACTIVE
   const toggleActive = async (slide) => {
     const { data } = await axios.put(
-      `http://localhost:45690/api/hero/${slide._id}`,
+      `${API_URL}/api/hero/${slide._id}`,
       { isActive: !slide.isActive },
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -112,7 +107,6 @@ function AdminDashboard() {
     setSlides(slides.map((s) => (s._id === slide._id ? data : s)));
   };
 
-  // EDIT HERO
   const saveEditedSlide = async () => {
     const formData = new FormData();
     formData.append("title", editingSlide.title);
@@ -124,7 +118,7 @@ function AdminDashboard() {
     }
 
     const { data } = await axios.put(
-      `http://localhost:45690/api/hero/${editingSlide._id}`,
+      `${API_URL}/api/hero/${editingSlide._id}`,
       formData,
       {
         headers: {
@@ -138,7 +132,6 @@ function AdminDashboard() {
     setEditingSlide(null);
   };
 
-  // REORDER
   const moveSlide = async (index, direction) => {
     const newSlides = [...slides];
     const target = index + direction;
@@ -152,7 +145,7 @@ function AdminDashboard() {
     setSlides(newSlides);
 
     await axios.put(
-      "http://localhost:45690/api/hero/reorder",
+      `${API_URL}/api/hero/reorder`,
       { slides: newSlides.map((s, i) => ({ id: s._id, order: i })) },
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -225,12 +218,10 @@ function AdminDashboard() {
           </div>
         )}
 
-        {/* ADD PRODUCT */}
         {section === "add" && (
           <AdminAddProduct products={products} setProducts={setProducts} />
         )}
 
-        {/* MANAGE PRODUCTS */}
         {section === "manage" && (
           <div>
             <h1 className="text-3xl font-bold mb-6">Manage Products</h1>
@@ -268,7 +259,7 @@ function AdminDashboard() {
                   <tr key={product._id} className="border-t">
                     <td className="p-3">
                       <img
-                        src={`http://localhost:45690/uploads/${product.image}`}
+                        src={`${API_URL}/uploads/${product.image}`}
                         alt={product.name}
                         className="w-16 h-16 object-cover rounded"
                       />
@@ -301,7 +292,6 @@ function AdminDashboard() {
           </div>
         )}
 
-        {/* ORDERS */}
         {section === "orders" && (
           <div>
             <h1 className="text-3xl font-bold mb-6">Orders</h1>

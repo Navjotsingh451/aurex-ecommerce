@@ -2,6 +2,7 @@ import { useState } from "react";
 import PageHeader from "../components/pageheader";
 import { useCart } from "../context/cartcontext";
 import axios from "axios";
+import API_URL from "../api";
 
 function Checkout() {
   const { cartItems } = useCart();
@@ -48,7 +49,7 @@ function Checkout() {
 
     try {
       // 👉 If backend exists
-      // await axios.post("http://localhost:45690/api/orders", orderData);
+// await axios.post(`${API_URL}/api/orders`, orderData);
 
       console.log("Order Placed:", orderData);
       alert("Order placed successfully ✅");

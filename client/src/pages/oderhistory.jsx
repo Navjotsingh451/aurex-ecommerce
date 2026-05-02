@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../context/authcontext";
+import API_URL from "../api";
 
 function OrderHistory() {
   const { userInfo } = useAuth();
@@ -9,7 +10,7 @@ function OrderHistory() {
   useEffect(() => {
     const fetchOrders = async () => {
       const { data } = await axios.get(
-        "http://localhost:45690/api/orders/myorders",
+        `${API_URL}/api/orders/myorders`,
         {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/productcard";
+import API_URL from "../api";
 
 function Category() {
   const { name } = useParams(); // "men,women,kids"
@@ -9,7 +10,7 @@ function Category() {
 
  useEffect(() => {
   const fetchProducts = async () => {
-    const { data } = await axios.get("http://localhost:45690/api/products");
+const { data } = await axios.get(`${API_URL}/api/products`);
 
     const selectedCategories = name
       .split(",")

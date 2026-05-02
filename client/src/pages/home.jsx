@@ -4,6 +4,7 @@ import ProductCard from "../components/productcard";
 import { useCart } from "../context/cartcontext";
 import { useAuth } from "../context/authcontext";
 import Banner from "../components/banner";
+import API_URL from "../api";
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -24,7 +25,7 @@ function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:45690/api/products");
+const { data } = await axios.get(`${API_URL}/api/products`);
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);

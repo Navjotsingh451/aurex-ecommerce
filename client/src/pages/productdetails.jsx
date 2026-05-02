@@ -4,6 +4,7 @@ import axios from "axios";
 import { useCart } from "../context/cartcontext";
 import { useAuth } from "../context/authcontext";
 import PageHeader from "../components/pageheader";
+import API_URL from "../api";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -15,8 +16,8 @@ function ProductDetails() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { data } = await axios.get(
-        `http://localhost:45690/api/products/${id}`
+const { data } = await axios.get(
+        `${API_URL}/api/products/${id}`
       );
       setProduct(data);
     };

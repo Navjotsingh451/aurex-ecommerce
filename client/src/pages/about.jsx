@@ -1,4 +1,5 @@
 import React from "react";
+import API_URL from "../api";
 
 function About() {
 
@@ -92,9 +93,9 @@ function About() {
       </div>
 
       {/* CALL TO ACTION */}
-      <section className="bg-grey-500 text-white h-[45vh] relative text-center flex flex-col items-center justify-center px-6">
+<section className="bg-grey-500 text-white h-[45vh] relative text-center flex flex-col items-center justify-center px-6">
         <img
-          src="http://localhost:45690/uploads/about-2.jpg"
+          src={`${API_URL}/uploads/about-2.jpg`}
           alt=""
           className="absolute inset-0  w-full h-full object-cover" 
         />

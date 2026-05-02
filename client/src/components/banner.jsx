@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import API_URL from "../api";
 
 function Banner() {
   const [slides, setSlides] = useState([]);
@@ -9,8 +10,8 @@ function Banner() {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:45690/api/hero"
+const { data } = await axios.get(
+          `${API_URL}/api/hero`
         );
 
         const activeSlides = data
@@ -49,8 +50,8 @@ function Banner() {
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          <img
-            src={`http://localhost:45690/uploads/${slide.image}`}
+<img
+            src={`${API_URL}/uploads/${slide.image}`}
             alt={slide.title}
             className="w-full h-full object-cover"
             

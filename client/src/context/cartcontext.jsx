@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState} from "react";
 import { useAuth } from "./authcontext";
 import axios from "axios";
+import API_URL from "../api";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -12,7 +13,7 @@ export const CartProvider = ({ children }) => {
       if (!userInfo?._id) return;
 
       const { data } = await axios.get(
-        `http://localhost:45690/api/cart/${userInfo._id}`
+        `${API_URL}/api/cart/${userInfo._id}`
       );
 
       setCartItems(data.items || []);
@@ -29,7 +30,7 @@ export const CartProvider = ({ children }) => {
   }, [userInfo]);
   const addToCart = async (product) => {
     const { data } = await axios.post(
-      "http://localhost:45690/api/cart/add",
+      `${API_URL}/api/cart/add`,
       {
         userId: userInfo._id,
         product,
@@ -42,7 +43,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (productId) => {
     const { data } = await axios.delete(
-      `http://localhost:45690/api/cart/${userInfo._id}/${productId}`
+      `${API_URL}/api/cart/${userInfo._id}/${productId}`
     );
 
     setCartItems(data.items || []);
@@ -50,7 +51,7 @@ export const CartProvider = ({ children }) => {
 
   const updateQty = async (productId, newQty) => {
     const { data } = await axios.put(
-      `http://localhost:45690/api/cart/${userInfo._id}/${productId}`,
+      `${API_URL}/api/cart/${userInfo._id}/${productId}`,
       { qty: newQty }
     );
     setCartItems(data.items || []);

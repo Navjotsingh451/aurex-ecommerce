@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authcontext";
+import API_URL from "../api";
 
 function Register() {
   const [name, setName] = useState("");
@@ -20,8 +21,8 @@ function Register() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:45690/api/auth/register",
+const { data } = await axios.post(
+        `${API_URL}/api/auth/register`,
         { name, email, password }
       );
       
